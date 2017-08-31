@@ -1,6 +1,5 @@
 App.match = App.cable.subscriptions.create "MatchChannel",
 
-
   connected: ->
     # Called when the subscription is ready for use on the server
 
@@ -9,6 +8,7 @@ App.match = App.cable.subscriptions.create "MatchChannel",
 
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
+
     # $('#messages').append data['message']
     alert data['message']
 
