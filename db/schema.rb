@@ -10,12 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170829152052) do
+ActiveRecord::Schema.define(version: 20170830151933) do
 
   create_table "matches", force: :cascade do |t|
     t.integer "round"
     t.string "winner"
     t.string "room_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "context"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
