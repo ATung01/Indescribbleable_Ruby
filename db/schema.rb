@@ -27,12 +27,10 @@ ActiveRecord::Schema.define(version: 20170830151933) do
   end
 
   create_table "sketches", force: :cascade do |t|
-    t.integer "users_id"
-    t.string "url"
+    t.string "data"
     t.string "answer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["users_id"], name: "index_sketches_on_users_id"
   end
 
   create_table "users", force: :cascade do |t|
