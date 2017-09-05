@@ -34,13 +34,15 @@ ActiveRecord::Schema.define(version: 20170830151933) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "matches_id"
+    t.integer "match_id"
     t.string "nickname"
     t.string "guess"
     t.integer "points"
+    t.boolean "your_turn?"
+    t.boolean "has_gone?"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["matches_id"], name: "index_users_on_matches_id"
+    t.index ["match_id"], name: "index_users_on_match_id"
   end
 
 end
