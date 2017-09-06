@@ -16,6 +16,8 @@ ActiveRecord::Schema.define(version: 20170830151933) do
     t.integer "round"
     t.string "winner"
     t.string "room_code"
+    t.string "started", default: "f"
+    t.string "ended", default: "f"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -29,17 +31,20 @@ ActiveRecord::Schema.define(version: 20170830151933) do
   create_table "sketches", force: :cascade do |t|
     t.string "data"
     t.string "answer"
+    t.string "room_code"
+    t.integer "match_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["match_id"], name: "index_sketches_on_match_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.integer "match_id"
     t.string "nickname"
     t.string "guess"
-    t.integer "points"
-    t.boolean "your_turn?"
-    t.boolean "has_gone?"
+    t.integer "points", default: 0
+    t.boolean "your_turn?", default: false
+    t.boolean "has_gone?", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["match_id"], name: "index_users_on_match_id"

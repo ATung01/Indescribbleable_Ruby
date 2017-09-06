@@ -18,7 +18,33 @@ class MatchesController < ApplicationController
       current_user: current_user
     }
     render json: status
+  end
+
+  def show
+    current_match = Match.find_by(id: params[:id])
+    status = {
+      users: current_match.users,
+      started: current_match.started,
+      sketch: current_match.sketch ? current_match.sketch : ""
+    }
+    render json: status
+  end
+
+
+  def update
+    current_match = Match.find_by(id: params[:id])
+    current_match.started = true
+    current_match.save
+
+    render json: current_match
 
   end
+
+  def turn_end
+    #called at end of turn, makes has_gone true, makes someone else the current user
+
+  end
+
+
 
 end

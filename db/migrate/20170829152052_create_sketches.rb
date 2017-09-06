@@ -3,6 +3,8 @@ class CreateSketches < ActiveRecord::Migration[5.1]
     create_table :sketches do |t|
       t.string :data
       t.string :answer
+      t.string :room_code
+      t.belongs_to :match
 
       t.timestamps
     end
