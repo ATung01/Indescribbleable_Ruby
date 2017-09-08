@@ -57,4 +57,5 @@ gem "figaro"
 gem "google-cloud-vision"
 gem "google-cloud"
 gem "httparty"
-gem "faker"
+gem 'random-word-generator', '~> 0.0.1'
+gem 'game_words'

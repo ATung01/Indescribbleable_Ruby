@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :matches, only: [:create, :update, :show]
 
   post '/matches/turn_end', to: 'matches#turn_end'
+  post '/matches/handle_guess', to: 'matches#handle_guess'
 
 
   mount ActionCable.server => '/cable'

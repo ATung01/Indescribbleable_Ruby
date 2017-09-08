@@ -4,6 +4,7 @@ class CreateMatches < ActiveRecord::Migration[5.1]
       t.integer :round
       t.string :winner
       t.string :room_code
+      t.string :answer
       t.string :started, :default => false
       t.string :ended, :default => false
 

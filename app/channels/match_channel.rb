@@ -10,8 +10,8 @@ class MatchChannel < ApplicationCable::Channel
   def speak(data)
     # Message.create! content: data['message']
     ActionCable.server.broadcast 'match_channel', message: data['message']
-    @match = Match.find_by(id: params[:room])
-    stream_for @match
+    # @match = Match.find_by(id: params[:room])
+    # stream_for @match
     # stream_from "some_channel"
   end
 
