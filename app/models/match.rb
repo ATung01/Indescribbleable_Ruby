@@ -12,4 +12,19 @@ class Match < ApplicationRecord
 
   end
 
+  def self.check_status(data)
+    current_match = Match.find_by(id: data['id'])
+    if current_match.users.find_by(your_turn?:true)
+      my_turn = true
+    else
+      my_turn = false
+    end
+    status = {
+      users: current_match.users,
+      started: current_match.started,
+      sketch: current_match.sketch ? current_match.sketch : "",
+      current_turn: current_match.users.find_by(your_turn?: true)
+    }
+  end
+
 end

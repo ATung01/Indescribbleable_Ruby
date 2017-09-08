@@ -3,16 +3,15 @@ class MatchChannel < ApplicationCable::Channel
     stream_from "match_channel"
   end
 
-  def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
+  def sendCanvas(data)
+    drawing = Sketch.check_sketch(data)
+    ActionCable.server.broadcast 'match_channel', canvas: drawing
+
   end
 
-  def speak(data)
-    # Message.create! content: data['message']
-    ActionCable.server.broadcast 'match_channel', message: data['message']
-    # @match = Match.find_by(id: params[:room])
-    # stream_for @match
-    # stream_from "some_channel"
+  def checkGameStatus(data)
+    status = Match.check_status(data)
+    ActionCable.server.broadcast 'match_channel', status: status
   end
 
   def recieved(data)
