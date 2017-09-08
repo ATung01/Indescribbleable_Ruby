@@ -4,5 +4,8 @@ Rails.application.routes.draw do
   resources :sketches,  only: [:create]
   resources :matches, only: [:create, :update, :show]
 
+  post '/matches/turn_end', to: 'matches#turn_end'
+
+
   mount ActionCable.server => '/cable'
 end

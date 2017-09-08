@@ -25,9 +25,11 @@ class MatchesController < ApplicationController
     status = {
       users: current_match.users,
       started: current_match.started,
-      sketch: current_match.sketch ? current_match.sketch : ""
+      sketch: current_match.sketch ? current_match.sketch : "",
+      current_turn: current_match.users.find_by(your_turn?: true)
     }
     render json: status
+
   end
 
 
@@ -35,12 +37,20 @@ class MatchesController < ApplicationController
     current_match = Match.find_by(id: params[:id])
     current_match.started = true
     current_match.save
+    current_user = current_match.users.find_by(id: params[:currentUserID])
+    current_user[:your_turn?] = true
+    current_user.save
 
     render json: current_match
 
   end
 
   def turn_end
+    current_user = User.find_by(id: params[:currentUserID])
+    next_user = current_user.end_turn
+
+    render json: next_user
+
     #called at end of turn, makes has_gone true, makes someone else the current user
 
   end
