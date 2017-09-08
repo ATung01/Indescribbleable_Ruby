@@ -22,6 +22,11 @@ class MatchesController < ApplicationController
 
   def show
     current_match = Match.find_by(id: params[:id])
+    if current_match.users.find_by(your_turn?:true)
+      my_turn = true
+    else
+      my_turn = false
+    end
     status = {
       users: current_match.users,
       started: current_match.started,
