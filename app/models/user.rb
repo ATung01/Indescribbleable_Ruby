@@ -9,9 +9,10 @@ class User < ApplicationRecord
     if next_user == nil
       self.match[:ended] = true
       self.match.save
-      return {status: "game end"}
+      return {ended: "game end"}
     end
     next_user[:your_turn?] = true
+    next_user[:has_gone?] = true
     next_user.match.gen_answer
     next_user.match.save
     next_user.save

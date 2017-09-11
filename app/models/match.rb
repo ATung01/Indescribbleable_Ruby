@@ -27,4 +27,25 @@ class Match < ApplicationRecord
     }
   end
 
+  # def add_users(data)
+  #
+  # end
+
+  def self.start_game(data)
+    current_match = Match.find_by(room_code: data['roomCode'])
+    current_match.started = true
+    current_match.gen_answer
+    current_match.save
+    current_user = current_match.users.find_by(id: data['currentUserID'])
+    current_user[:your_turn?] = true
+    current_user.save
+    return {current_match: current_match, all_users: current_match.users, current_turn: current_user}
+  end
+
+  def self.end_turn(data)
+    current_user = User.find_by(id: data['currentTurnID'])
+    return current_user.end_turn
+
+  end
+
 end
