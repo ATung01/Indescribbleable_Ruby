@@ -54,8 +54,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'rack-cors', :require => 'rack/cors'
 gem "figaro"
-gem "google-cloud-vision"
 gem "google-cloud"
+gem "google-cloud-vision"
+gem "google-api-client"
 gem "httparty"
 gem 'random-word-generator', '~> 0.0.1'
 gem 'game_words'

@@ -331,6 +331,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   figaro
   game_words
+  google-api-client
   google-cloud
   google-cloud-vision
   httparty

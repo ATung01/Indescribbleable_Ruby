@@ -60,10 +60,8 @@ class MatchesController < ApplicationController
   end
 
   def handle_guess
-    current_match = Match.find_by(id: params[:id])
-    guess = params[:guess]
-
-
+    # current_match = Match.find_by(id: params[:id])
+    # guess = params[:guess]
   end
 
 
