@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20170830151933) do
     t.bigint "match_id"
     t.string "nickname"
     t.integer "points", default: 0
+    t.boolean "correctly_guessed?", default: false
     t.boolean "your_turn?", default: false
     t.boolean "has_gone?", default: false
     t.datetime "created_at", null: false

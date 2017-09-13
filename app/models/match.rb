@@ -39,8 +39,9 @@ class Match < ApplicationRecord
     current_match = Match.find_by(id: data['id'])
     current_guesser = User.find_by(id: data['current_user_ID'])
     current_drawer = User.find_by(id: data['current_turn_ID'])
-    if current_match.answer == data['guess']
+    if current_match.answer == data['guess'] && current_guesser[:correctly_guessed?] == false
       current_guesser.points += 1000
+      current_guesser[:correctly_guessed?] = true
       current_guesser.save
       current_drawer.points += 500
       current_drawer.save
