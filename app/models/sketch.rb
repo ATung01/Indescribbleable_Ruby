@@ -44,7 +44,7 @@ class Sketch < ApplicationRecord
 
   def self.check_sketch(data)
     encoded_sketch = data['image']
-    encoded_sketch = encoded_sketch.slice(22..-1)
+    encoded_sketch = encoded_sketch.slice(39..-1)
     encoded_sketch = encoded_sketch.slice(0..-2)
     rc = data['room_code']
 
