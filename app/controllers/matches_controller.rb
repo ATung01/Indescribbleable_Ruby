@@ -44,7 +44,7 @@ class MatchesController < ApplicationController
   # end
 
 
-  def update
+  # def update
     # #starts the match
     # current_match = Match.find_by(id: params[:id])
     # current_match.started = true
@@ -55,19 +55,19 @@ class MatchesController < ApplicationController
     # current_user.save
     #
     # render json: current_match
-  end
+  # end
 
-  def turn_end
+  # def turn_end
     # current_user = User.find_by(id: params[:currentUserID])
     # next_user = current_user.end_turn
     #
     # render json: next_user
-  end
+  # end
 
-  def handle_guess
+  # def handle_guess
     # current_match = Match.find_by(id: params[:id])
     # guess = params[:guess]
-  end
+  # end
 
 
 
