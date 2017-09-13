@@ -29,8 +29,10 @@ class Sketch < ApplicationRecord
     ]
              }.to_json,
     :headers => { 'Content-Type' => 'application/json' } )
-                  # 'Authorization' => 'Bearer ya29.El_DBAGONTWFsDFEgoD42GCcOZWcLfIRsmWv9gKaNVSFQ5NOTcxlV--4n7VIUEpmZNbM8HuSacfuSMQ8Ry3qoGwr1_-1Bo1rOmRxtT_K7Ph3KAQBTYXiGNulAVApl_pxUA'} )
-    if response["responses"][0]["labelAnnotations"]
+
+    if response["error"]
+      descriptions = ["Beep Boop I have no idea what this is.."]
+    elsif response["responses"][0]["labelAnnotations"]
       descriptions = response["responses"][0]["labelAnnotations"].map do |x|
         if common_words.exclude?(x["description"])
           x["description"]
@@ -39,14 +41,13 @@ class Sketch < ApplicationRecord
     else
         descriptions = ["Beep Boop I have no idea what this is.."]
     end
-    # byebug
     return descriptions
   end
 
   def self.check_sketch(data)
     # byebug
     encoded_sketch = data['image']
-    encoded_sketch = encoded_sketch.slice(22..-1) #22 for localhost:8080, 39 for herokuapp
+    encoded_sketch = encoded_sketch.slice(39..-1) #22 for localhost:8080, 39 for herokuapp
     encoded_sketch = encoded_sketch.slice(0..-2)
     rc = data['room_code']
 
