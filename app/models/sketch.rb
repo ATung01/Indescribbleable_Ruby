@@ -39,13 +39,14 @@ class Sketch < ApplicationRecord
     else
         descriptions = ["Beep Boop I have no idea what this is.."]
     end
+    # byebug
     return descriptions
   end
 
   def self.check_sketch(data)
-    byebug
+    # byebug
     encoded_sketch = data['image']
-    encoded_sketch = encoded_sketch.slice(39..-1)
+    encoded_sketch = encoded_sketch.slice(38..-1)
     encoded_sketch = encoded_sketch.slice(0..-2)
     rc = data['room_code']
 
