@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170830151933) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "matches", force: :cascade do |t|
     t.integer "round"
     t.string "winner"
@@ -32,14 +35,14 @@ ActiveRecord::Schema.define(version: 20170830151933) do
   create_table "sketches", force: :cascade do |t|
     t.string "data"
     t.string "room_code"
-    t.integer "match_id"
+    t.bigint "match_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["match_id"], name: "index_sketches_on_match_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "match_id"
+    t.bigint "match_id"
     t.string "nickname"
     t.integer "points", default: 0
     t.boolean "your_turn?", default: false
