@@ -42,7 +42,7 @@ Rails.application.configure do
   # Mount Action Cable outside main process or domain
   config.action_cable.mount_path = '/cable'
   config.action_cable.url = 'wss://indescribbleable-ruby.herokuapp.com/cable'
-  config.action_cable.allowed_request_origins = [ 'http://indescribbleable.herokuapp.com', 'https://indescribbleable.herokuapp.com', 'http://localhost:8080', /http:\/\/localhost:*/, /http:\/\/localhost:8080/, /https:\/\/localhost:*/, /https:\/\/indescribbleable.herokuapp.com.*/, /http:\/\/indescribbleable.herokuapp.com.*/ ]
+  config.action_cable.allowed_request_origins = [ 'http://indescribbleable.herokuapp.com', 'https://indescribbleable.herokuapp.com', 'http://localhost:8080', /http:\/\/localhost:*/, /http:\/\/localhost:8080/, /https:\/\/localhost:*/, /https:\/\/indescribbleable.herokuapp.com.*/, /http:\/\/indescribbleable.herokuapp.com.*/, /https:\/\/vision.googleapis.com/v1/images:annotate?key=*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
