@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   post '/matches/turn_end', to: 'matches#turn_end'
   post '/matches/handle_guess', to: 'matches#handle_guess'
+  get '/test_api', to:"sketches#test_api"
 
 
   mount ActionCable.server => '/cable'

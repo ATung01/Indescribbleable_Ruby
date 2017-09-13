@@ -5,6 +5,10 @@ require "google-cloud-vision"
 
 class SketchesController < ApplicationController
 
+  def test
+    render json:{value:"#{ENV['API_KEY']}"}
+  end
+
   # def create
   #   encoded_sketch = params[:image]
   #   encoded_sketch = encoded_sketch.slice(22..-1)
