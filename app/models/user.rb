@@ -8,6 +8,7 @@ class User < ApplicationRecord
     if next_user == nil
       self.match[:ended] = true
       self.match.save
+      self.match.destroy
       return {ended: "game end"}
     end
     self[:your_turn?] = false

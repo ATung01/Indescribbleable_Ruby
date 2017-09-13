@@ -2,6 +2,11 @@ class MatchesController < ApplicationController
 
 
   def create
+    Match.all.each do |m|
+      if ((Time.now - m.created_at)/60) > 30
+        m.destroy
+      end
+    end
     r_code = params[:roomCode]
     nick = params[:nickname]
     current_match = Match.find_or_create_by(room_code: r_code)

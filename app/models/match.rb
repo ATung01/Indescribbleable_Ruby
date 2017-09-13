@@ -11,12 +11,12 @@ class Match < ApplicationRecord
     current_user = current_match.users.find_by(id: data['currentUserID'])
     current_user[:your_turn?] = true
     current_user.save
-    return {current_match: current_match, all_users: current_match.users, current_turn: current_user}
+    return {current_match: current_match, all_users: current_match.users, current_turn: current_user, answer: current_match.answer}
   end
 
   def gen_answer
     gen = GameWords::Generator.new
-    self.answer = gen.words('pictionary').sample
+    self.answer = gen.words('pictionary', 'easy').sample
   end
 
   def self.check_status(data)
@@ -30,7 +30,8 @@ class Match < ApplicationRecord
       users: current_match.users,
       started: current_match.started,
       sketch: current_match.sketch ? current_match.sketch : "",
-      current_turn: current_match.users.find_by(your_turn?: true)
+      current_turn: current_match.users.find_by(your_turn?: true),
+      answer: current_match.answer
     }
   end
 
@@ -62,13 +63,18 @@ class Match < ApplicationRecord
 
   def self.end_turn(data)
     current_user = User.find_by(id: data['currentTurnID'])
-    return current_user.end_turn
+    current_match = Match.find_by(room_code: data['roomCode'])
+    guesses = Sketch.call_robot(data["image"])
+    if guesses.include?(current_match.answer)
+      current_user.points = 0
+    end
+    current_match.gen_answer
+
+
+    return {c_user: current_user.end_turn, robot_guesses: guesses}
   end
 
   def self.check_robot(data)
-    current_match = Match.find_by(room_code: data['roomCode'])
-    Sketch.call_robot(data["image"])
-    new_sketch = Sketch.create(data: encoded_sketch)
   end
 
 end

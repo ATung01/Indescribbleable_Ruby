@@ -1,47 +1,56 @@
 class MatchChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "match_channel"
     all_users = Match.all_users(params)
-    ActionCable.server.broadcast 'match_channel', allUsers: all_users
+    @match = Match.find_by(room_code: params['room'])
+    stream_for @match
+    MatchChannel.broadcast_to @match, allUsers: all_users
+    # ActionCable.broadcast_to_to(@match, allUsers: all_users)
   end
 
   def startGame(data)
+    @match = Match.find_by(room_code: params['room'])
     start = Match.start_game(data)
-    ActionCable.server.broadcast 'match_channel', startGame: start
+    MatchChannel.broadcast_to @match, startGame: start
   end
 
   def takeAGuess(data)
+    @match = Match.find_by(room_code: params['room'])
     result = Match.take_a_guess(data)
-    ActionCable.server.broadcast 'match_channel', guess: result
+    MatchChannel.broadcast_to @match, guess: result
   end
 
   def endTurn(data)
+    @match = Match.find_by(room_code: params['room'])
     user = Match.end_turn(data)
-    if user[:ended]
-      ActionCable.server.broadcast 'match_channel', endGame: user
+    if user[:c_user][:ended]
+      MatchChannel.broadcast_to @match, endGame: user
     else
-      ActionCable.server.broadcast 'match_channel', endTurn: user
+      MatchChannel.broadcast_to @match, endTurn: user
     end
   end
 
   def sendCanvas(data)
+    @match = Match.find_by(room_code: params['room'])
     drawing = Sketch.check_sketch(data)
-    ActionCable.server.broadcast 'match_channel', canvas: drawing
+    MatchChannel.broadcast_to @match, canvas: drawing
   end
 
   def checkGameStatus(data)
+    @match = Match.find_by(room_code: params['room'])
     status = Match.check_status(data)
-    ActionCable.server.broadcast 'match_channel', status: status
+    MatchChannel.broadcast_to @match, status: status
   end
 
   def sendToRobot(data)
+    @match = Match.find_by(room_code: params['room'])
     result = Match.check_robot(data)
-    ActionCable.server.broadcast 'match_channel', robot: result
+    MatchChannel.broadcast_to @match, robot: result
 
   end
 
-  def recieved(data)
-    MatchChannel.broadcast_to(@match, {match: @match})
+  def received(data)
+    @match = Match.find_by(room_code: params['room'])
+    MatchChannel.broadcast_to @match, match: @match
   end
 
 

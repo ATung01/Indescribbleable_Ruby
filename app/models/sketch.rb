@@ -6,7 +6,7 @@ class Sketch < ApplicationRecord
   belongs_to :match
 
   def self.call_robot(encoded_sketch)
-    common_words = ["white", "black", "black and white", "line art", "line", "font", "cartoon", "drawing", "clip art", "logo", "graphics", "monochrome", "monochrome photography", "angle", "design"]
+    common_words = ["white", "black", "black and white", "line art", "line", "font", "cartoon", "drawing", "clip art", "logo", "graphics", "monochrome", "monochrome photography", "angle", "design", "text", "illustration"]
     url = "https://vision.googleapis.com/v1/images:annotate?key=#{ENV['API_KEY']}"
     response = HTTParty.post(url,
     :body => { requests: [
@@ -17,9 +17,14 @@ class Sketch < ApplicationRecord
         features: [
           {
             "type": "LABEL_DETECTION",
-            maxResults: 40
+            maxResults: 50
           }
-        ]
+        ],
+        "imageContext": {
+          "languageHints": [
+            "en"
+          ]
+        }
       }
     ]
              }.to_json,
@@ -30,12 +35,10 @@ class Sketch < ApplicationRecord
         if common_words.exclude?(x["description"])
           x["description"]
         end
-      end
-      descriptions.compact
+      end.compact
     else
-        descriptions = ["Beep Boop I have no idea what this is."]
+        descriptions = ["Beep Boop I have no idea what this is.."]
     end
-    byebug
     return descriptions
   end
 
