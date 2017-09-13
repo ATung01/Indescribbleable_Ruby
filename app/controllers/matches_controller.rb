@@ -14,6 +14,8 @@ class MatchesController < ApplicationController
       render json: {error: "that name is taken"} and return
     elsif current_match.users.length < 6
       current_user = current_match.users.create(nickname: nick)
+    elsif current_match.started == true
+      render json: {error: "that game has already started"}
     else
       render json: {error: "that room is full"} and return
     end
