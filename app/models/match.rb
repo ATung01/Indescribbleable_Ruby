@@ -62,7 +62,7 @@ class Match < ApplicationRecord
   end
 
   def self.end_turn(data)
-    byebug
+    # byebug
     current_user = User.find_by(id: data['currentTurnID'])
     current_match = Match.find_by(room_code: data['roomCode'])
     guesses = Sketch.call_robot(data["image"])
