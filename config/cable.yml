@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: redis
-  url: redis://localhost:6379/1
+  url: redis://h:p12943567bf6da26cc06de17001409dbc2ac70a1f2f4dfbb326577c7921981a80@ec2-34-230-181-147.compute-1.amazonaws.com:19799
   channel_prefix: Indescribbleable_Ruby_production
