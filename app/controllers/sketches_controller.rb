@@ -5,7 +5,7 @@ require "google-cloud-vision"
 
 class SketchesController < ApplicationController
 
-  def test
+  def test_api
     render json:{value:"#{ENV['API_KEY']}"}
   end
 
