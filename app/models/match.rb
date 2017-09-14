@@ -44,7 +44,7 @@ class Match < ApplicationRecord
       current_guesser.points += 1000
       current_guesser[:correctly_guessed?] = true
       current_guesser.save
-      current_drawer.points += 500
+      current_drawer.points += 1000
       current_drawer.save
       return {
         points: {
