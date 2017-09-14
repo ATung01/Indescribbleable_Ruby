@@ -6,10 +6,12 @@ class User < ApplicationRecord
     self.save
     next_user = self.match.users.find_by(has_gone?: false)
     if next_user == nil
+      most_points = self.match.users.map{|user| user.points}.max
+      winners = self.match.users.select{ |user| user.points == most_points }
       self.match[:ended] = true
       self.match.save
       self.match.destroy
-      return {ended: "game end"}
+      return {ended: winners}
     end
     self[:your_turn?] = false
     self.save

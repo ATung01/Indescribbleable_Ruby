@@ -47,7 +47,7 @@ class Sketch < ApplicationRecord
   def self.check_sketch(data)
     # byebug
     encoded_sketch = data['image']
-    encoded_sketch = encoded_sketch.slice(39..-1) #22 for localhost:8080, 39 for herokuapp
+    encoded_sketch = encoded_sketch.slice(22..-1) #22 for localhost:8080, 39 for herokuapp
     encoded_sketch = encoded_sketch.slice(0..-2)
     rc = data['room_code']
 
