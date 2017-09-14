@@ -11,13 +11,13 @@ class MatchesController < ApplicationController
     nick = params[:nickname]
     current_match = Match.find_or_create_by(room_code: r_code)
     if current_match.started == "t"
-    render json: {error: "that game has already started"} and return
+    render json: {error: "That game has already started!"} and return
     elsif current_match.users.find_by(nickname: nick)
-      render json: {error: "that name is taken"} and return
+      render json: {error: "That name is taken!"} and return
     elsif current_match.users.length < 6
       current_user = current_match.users.create(nickname: nick)
     else
-      render json: {error: "that room is full"} and return
+      render json: {error: "That room is full!"} and return
     end
     status = {
       roomCode: r_code,
