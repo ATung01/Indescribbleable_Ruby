@@ -4,7 +4,6 @@ class MatchChannel < ApplicationCable::Channel
     @match = Match.find_by(room_code: params['room'])
     stream_for @match
     MatchChannel.broadcast_to @match, allUsers: all_users
-    # ActionCable.broadcast_to_to(@match, allUsers: all_users)
   end
 
   def startGame(data)
